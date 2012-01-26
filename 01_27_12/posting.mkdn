@@ -37,7 +37,7 @@ This command will then create the following directory structure:
     2 directories, 11 files
 
 What's nice about "module-starter" is that it creates all the needed files and
-boilerplate code, meta-files, and assocated tests to deploy a CPAN module.  
+boilerplate code, meta-files, and associated tests to deploy a CPAN module.  
 
 Now let me give some background on what exactly the various flags represent when
 we executed the above command.  The "mi" flag sets the builder to use
@@ -49,7 +49,7 @@ parameters. As obvious as the author and email parameters are, they are needed
 to populate the various placeholders in the module. 
 
 A tip to make life easer in the future, the author and email parameter can be set 
-globally in a config file so that this does not need to be specified everytime 
+globally in a config file so that this does not need to be specified each time
 module-start is run.  In order to create a global config for module-start
 first create a directory in your home path named .module-starter and place a file 
 named "config" with the following key values:
@@ -57,9 +57,9 @@ named "config" with the following key values:
     author: Logan Bell
     email:  logie@cpan.org
 
-Ok, let's take a peak at some of these files shall we? The guts of the program 
+Ok, let's take a peek at some of these files shall we? The guts of the program 
 reside in *lib/HelloWorld.pm".  All of the unit tests for this program live 
-in t/*. Futher, if we open up the Makefile.PL we'll see it's setup and ready 
+in t/*. Further, if we open up the Makefile.PL we'll that it is setup and ready 
 to run with the needed meta information and required modules.
 
 What a Makefile.PL looks like:
