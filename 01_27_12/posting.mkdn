@@ -1,0 +1,136 @@
+# How To Create A Perl Project
+
+There are multiple ways to create a Perl [CPAN](http://search.cpan.org) 
+ready module, and one of the most popular ways is to use [Module::Starter.](https://metacpan.org/module/Module::Starter "Module::Starter")
+In this tutorial we'll walk through how to create a module, write a simple
+test, write some code, and how to run and test that code.
+
+If one hasn't installed it yet, the following command will take care of this:
+
+    $ cpanm Module::Starter
+
+Now that we have Module::Starter installed, it's pretty easy to create the
+needed directory structure for a CPAN module. This can be done by executing
+the following command:
+
+    $ module-starter -mi -module=HelloWorld -author="Logan Bell" -email=logie@cpan.org
+
+This command will then create the following directory structure:
+
+    $ tree HelloWorld
+
+    HelloWorld/
+    ├── Changes
+    ├── MANIFEST
+    ├── Makefile.PL
+    ├── README
+    ├── ignore.txt
+    ├── lib
+    │   └── HelloWorld.pm
+    └── t
+        ├── 00-load.t
+        ├── boilerplate.t
+        ├── manifest.t
+        ├── pod-coverage.t
+        └── pod.t
+    
+    2 directories, 11 files
+
+What's nice about "module-starter" is that it creates all the needed files and
+boilerplate code, meta-files, and assocated tests to deploy a CPAN module.  
+
+Now let me give some background on what exactly the various flags represent when
+we executed the above command.  The "mi" flag sets the builder to use
+[Module::Install.](https://metacpan.org/module/Module::Install) Module::Install is a
+popular module installer. When this package is built it will be built using
+the constructs that Module::Install uses. The "module" parameter is the name
+of the Perl Module, in this case HelloWorld, and we have author and email
+parameters. As obvious as the author and email parameters are, they are needed
+to populate the various placeholders in the module. 
+
+A tip to make life easer in the future, the author and email parameter can be set 
+globally in a config file so that this does not need to be specified everytime 
+module-start is run.  In order to create a global config for module-start
+first create a directory in your home path named .module-starter and place a file 
+named "config" with the following key values:
+
+    author: Logan Bell
+    email:  logie@cpan.org
+
+Ok, let's take a peak at some of these files shall we? The guts of the program 
+reside in *lib/HelloWorld.pm".  All of the unit tests for this program live 
+in t/*. Futher, if we open up the Makefile.PL we'll see it's setup and ready 
+to run with the needed meta information and required modules.
+
+What a Makefile.PL looks like:
+
+    use inc::Module::Install;
+    
+    name     'HellowWord';
+    all_from 'lib/HelloWord.pm';
+    author   q{Me <logie@cpan.org>};
+    license  'perl';
+    
+    build_requires 'Test::More';
+    
+    requires 'Test::Most'   => 0;
+    
+    auto_install;
+    
+    WriteAll;
+
+In the Makefile.PL we specify some global parameters that are needed for this module to build.  
+The "all_from" parameter will extract all the meta data it can from the
+source. Further down there is the "build_requires" key, which sets a needed build dependency,
+which in this case is Test::Most. The "auto_install" key will install the
+needed dependencies and "WriteAll" will create the following files META.yml and the Makefile.
+
+Now let's create a new test by opening "t/001-speak.t". Within this test we'll
+initialize a HelloWorld and have it utter those infamous words "hello world".
+Below is some example code:
+
+    use Test::Most;
+    
+    use_ok('HelloWorld');
+    
+    my $subject = HelloWorld->new;
+    
+    is $subject->speak, "hello world";
+    
+    done_testing;
+
+Now on the coding side we'll open lib/HelloWord.pm. The first thing one should see
+is that there is a fair amount of boiler plate code. Most of this code can be
+removed, and in fact can be as simple as the following:
+
+    package HelloWorld;
+    
+    use Moo;
+
+    =head1 SUBROUTINES/METHODS
+    
+    =head2 speak
+    
+    =cut
+    
+    sub speak {
+        return "hello world"
+    }
+
+    1;
+
+Now, we can simulate building this package the following way:
+
+    $ perl Makefile.Pl
+    $ make
+    $ make test
+
+Hopefully if everything is correct we should see the following output:
+
+    All tests successful.
+    Files=6, Tests=8,  0 wallclock secs ( 0.03 usr  0.02 sys +  0.18 cusr  0.03
+    csys =  0.26 CPU)
+    Result: PASS
+
+It's really that simple! That's all that is involved in making a CPAN friendly module. 
+Further, all of the source for this project can be found at the following github location.
