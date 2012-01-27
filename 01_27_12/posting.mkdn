@@ -133,4 +133,7 @@ Hopefully if everything is correct we should see the following output:
     Result: PASS
 
 It's really that simple! That's all that is involved in making a CPAN friendly module. 
-Further, all of the source for this project can be found at the following github location.
+Further, all of the source for this project can be found at the following
+github
+[location](https://github.com/logie17/BlogTutorials/tree/master/01_27_12/example_code).
+
