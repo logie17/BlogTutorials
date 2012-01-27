@@ -1,0 +1,4 @@
+# Getting started with Moose
+
+    $ module-starter -mi -module=Meese -author="Logan Bell" -email=logie@cpan.org
+
