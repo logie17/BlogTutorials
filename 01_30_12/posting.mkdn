@@ -1,4 +1,102 @@
 # Getting started with Moose
 
-    $ module-starter -mi -module=Meese -author="Logan Bell" -email=logie@cpan.org
+## What is Moose?
+
+(Moose)[http://www.moose.org] is an object system for Perl, what this means 
+is that it offers a more delcarative syntax to make object oriented 
+programming both easier and powerful. (Moose)[https://metacpan.org/module/Moose] 
+incorporates many ideas from the Perl 6 object model and also includes 
+interesting concepts from other languages as well. The two big things 
+that Moose offers a developer is more syntatical sugar and the power of 
+introspection. 
+
+## The old way
+
+Now let's consider the old way of building a class in perl with a simple
+attribute. For example the old way of create building a constructor in perl
+
+    package Cat;
+    use base qw('Animal','Mammal');
+
+    sub is_alive {
+        my ($self, $bool) = @_;
+        return $bool ? $self->{is_alive} = $bool : $self->{is_alive};
+    }
+
+    sub new {
+        my ( $class, %params ) = @_;
+        
+        my $self = ref $class || $class;
+
+        return bless {}, $self;
+    }
+
+    1;
+
+Notice how there is a lot of very perlish idiomatic code that goes into place to
+make object oriented programming possible. The pratice of "blessing" a hashref, 
+getting $self from the special @_ array, setting self to a ref of $class, extensive 
+coding to attributes, and multiple inheritance! Sheesh, no  no wonder many so
+people tend to think of Perl has a hacker scripint lanauge!  To Perl's credit 
+(although it depends on one's perspective), the primary reason for some of this strangeness
+is due largely on the fact the object oriented perl was bolted onto Perl 5,
+and was not part of the core construct of the language.  Thankfully much
+thought and work has gone into Moose which addresses many of these
+shortcomings. Let's take a look at two aspects of what Moose offers - both the
+sugar and the introspection.
+
+## Examples of sugar
+
+As mentioned Moose comes equipped with some syntatic sweetness that
+makes object oriented programming in Perl a much richer experience. Below is
+the same code example but using the much cleaner Moose semantics. 
+
+    package Cat;
+    use Moose;
+    extends 'Animal'    # No longer use base
+    with 'Mammal'       # Introduction of roles
+
+    has 'is_alive' => ( # Supports attributes
+        is  => 'rw',
+        isa => 'Bool'
+    );
+    
+    no Moose;
+
+Notice that Moose supports attributes, roles, and makes inheritance much
+cleaner. 
+
+## Examples of introspection
+
+Now one of the most powerful features of Moose is the tools it gives a
+programmer for introspection. The heavy lifting for this in Moose is done by
+the MOP.  Below is a couple examples on how to iterate over
+known methods and attributes:
+
+    package Cat;
+    use Moose;
+
+    my $meta = __PACAKGE__->meta;
+
+    for my $attr ($meta->get_all_attributes ) {
+        print $attr->name,"\n";
+    }
+
+    for my $method ( $meta->get_all_methods ) {
+        print $method->fully_qualified_name, "\n";
+    }
+
+Having this at one's fingertips makes it easier to dynamically create classes, inspect them,
+add methods, and not feel like one is partaking in any sort of medevial wizardry.
+
+## Where to go from here
+
+Perl is is nearly 25 years old and it's still a very active and rich 
+programming language, as demonstrated in by the vastness of (CPAN.)[http://www.cpan.org] The 
+canonical source for more information regarding moose is the CPAN tutorial or 
+check out the (project page.)[http://www.moose.org] So install Moose and start
+using modern Perl practices! 
+
+Further, many of the examples in this post were either lifted or inspired by
+the official Moose documenation. 
 
