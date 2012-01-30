@@ -2,13 +2,14 @@
 
 ## What is Moose?
 
-[Moose](http://www.moose.org) is an object system for Perl, what this means 
-is that it offers a more delcarative syntax to make object oriented 
+[Moose](http://www.moose.org) is an object system for Perl. What this means 
+is that it offers a more declarative syntax to make object oriented 
 programming both easier and powerful.
 [Moose](https://metacpan.org/module/Moose)
-incorporates many ideas from the Perl 6 object model and also includes 
+incorporates many ideas from the [Perl
+6](http://dev.perl.org/perl6/doc/design/apo/A12.html) object model and also includes 
 interesting concepts from other languages as well. The two big things 
-that Moose offers a developer is more syntatical sugar and the power of 
+that Moose offers a developer is more syntactical sugar and the power of 
 [introspection.](http://en.wikipedia.org/wiki/Type_introspection#Perl)
 
 ## The old way
@@ -36,7 +37,7 @@ getter/setter method.
     1;
 
 Notice how there is a lot of very perlish idiomatic code that goes into place to
-make object oriented programming possible. The pratice of "blessing" a hashref, 
+make object oriented programming possible. The practice of "blessing" a hashref, 
 getting $self from the special @_ array, setting $self to a ref of $class, extensive 
 coding for a simple setter/getter, and multiple inheritance! Sheesh, no  no
 wonder so many people tend to think of Perl as a haxor script language!
@@ -49,7 +50,7 @@ upgrades that Moose offers - both the sugar and the introspection.
 
 ## Examples of sugar
 
-As mentioned Moose comes equipped with some syntatic sweetness that
+As mentioned Moose comes equipped with some syntactic sweetness that
 makes object oriented programming in Perl a much richer experience. Below is
 the same code example but using the much cleaner Moose semantics. 
 
@@ -93,7 +94,7 @@ on how to iterate over known methods and attributes:
     ...
 
 Having this at one's fingertips makes it easier to dynamically create classes, inspect them,
-add methods, and not feel like one is partaking in any sort of medevial wizardry.
+add methods, and not feel like one is partaking in any sort of medieval wizardry.
 
 ## Where to go from here
 
@@ -104,6 +105,6 @@ regarding moose is the CPAN tutorial or check out the [project page.](http://www
 So install Moose and start using modern Perl practices! 
 
 Further, many of the examples in this post were by the official Moose
-[documenation.](https://metacpan.org/module/Moose::Manual) More detailed posts
+[documentation.](https://metacpan.org/module/Moose::Manual) More detailed posts
 on the power of Moose will be penned in the near future!
 
