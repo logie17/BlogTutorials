@@ -39,8 +39,9 @@ getter/setter method.
 Notice how there is a lot of very perlish idiomatic code that goes into place to
 make object oriented programming possible. The practice of "blessing" a hashref, 
 getting $self from the special @_ array, setting $self to a ref of $class, extensive 
-coding for a simple setter/getter, and multiple inheritance! Sheesh, no  no
-wonder so many people tend to think of Perl as a haxor script language!
+coding for a simple setter/getter, and multiple inheritance! Sheesh, no
+wonder so many people tend to think of Perl as a
+[haxor](http://en.wikipedia.org/wiki/Haxor#Haxor_and_suxxor_.28suxorz.29) script language!
 However, to Perl's credit, although it depends on one's perspective, the primary 
 reason for some of this strangeness is due largely on the fact the object
 oriented perl was bolted onto Perl 5. It was not part of the core construct of
