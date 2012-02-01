@@ -1,1 +1,18 @@
-# Moose and roles
+# Roles with Moose
+
+In my previous [posting](boo) I discussed Moose and two advantages to using.
+Moose is a large library and it offers so many features that it's difficult to
+it justice in a single post. Today, I think it would be good to take tour of
+Moose roles, what they are, and how they promote good object oriented design.
+
+## A Role?
+
+A role in terms of Moose is very similar to a
+["mix-in"](http://en.wikipedia.org/wiki/Mixin) that is common in other
+languages such as Ruby. The idea behind a role is that it contains methods and
+attributes that can be applied to a class, but the role itself cannot be
+iniatilized. For example, logging is a common role 
+
+## Let's see it in action
+
+
