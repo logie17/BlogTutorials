@@ -11,8 +11,54 @@ A role in terms of Moose is very similar to a
 ["mix-in"](http://en.wikipedia.org/wiki/Mixin) that is common in other
 languages such as Ruby. The idea behind a role is that it contains methods and
 attributes that can be applied to a class, but the role itself cannot be
-iniatilized. For example, logging is a common role 
+iniatilized. For example, logging is a common role, or anything abstract that
+adds characteristtis to a class. 
 
 ## Let's see it in action
 
+    package SophisticatedLogger;
+    use Moose::Role;
 
+    sub log {
+        my ($shelf, $msg) = @_
+        print "$msg\n";
+    }
+
+Further in our class:
+
+    package WebApp;
+    use Moose;
+    with 'SophisticatedLogger';
+
+    sub do_it {
+        my $self = shift;
+        $self->log("We're doing it!");
+    }
+
+Pretty cool? It gets even better. Let's say that one comes from the java world
+of implemented interfaces - well roles can enforce an interface when they are
+consumed by a class. We could have an attribute be implemented such as the
+following:
+
+    package SophisticatedLogger;
+    use Moose::Role;
+
+    sub log {
+        my ($shelf, $msg) = @_
+        print "$msg\n";
+    }
+
+    package WebApp;
+    use Moose;
+
+    
+
+    with 'SophisticatedLogger';
+
+    sub do_it {
+
+        my $self = shift;
+        $self->log("We're doing it!");
+    }
+
+### MODIFYING INSTANCES
