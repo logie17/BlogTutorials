@@ -3,7 +3,7 @@
 In my previous [posting](http://www.loganbell.org/pages/post/view/modern-perl-with-moose/) 
 I discussed [Moose](http://www.moose.org) and two advantages to using it.  Moose is a large library and 
 it offers so many features that it's difficult to do it justice in a single post. 
-Today, I think it would be good to take a tour of Moose roles, Primarily I
+Today, I think it would be good to take a tour of Moose roles. Primarily I
 would like to describe what they are and how to do some general
 implementations.
 
@@ -14,8 +14,8 @@ A role in terms of Moose is very similar to a
 languages such as [Ruby.](http://www.ruby.org) The idea behind a role is that it contains methods and
 attributes that can be applied to a class, but the role itself cannot be
 initialized like a class. For example, logging is a common usage of role, or anything 
-abstract that adds characteristics to a class. Someone once said that classes
-are nouns, methods are verbs, and roles are adjectives.
+abstract that adds characteristics to a class. A useful metaphor, as someone
+once said, is to think of classes as nouns, methods as verbs, and roles as adjectives.
 
 Let's see a a role in action:
 
@@ -39,16 +39,16 @@ Later in our class, we implement or consume the role:
     }
 
 Notice how $self now has access to the "log" method? It gets even better. Let's 
-say that one one is privy to the concept of java style interfaces, roles can
-used to enforce an interface when they are consumed by a class. This means that a role can
+say that one is privy to the concept of Java interfaces; roles in a similar
+manner can used to enforce an interface when they are consumed by a class. This means that a role can
 dictate that a method or attribute be implemented such as in the
 following example:
 
     package SophisticatedLogger;
     use Moose::Role;
     
-    requires 'prefix';      #required attribute
-    requires 'logging_on';  #requird method
+    requires 'prefix';      # required attribute
+    requires 'logging_on';  # required method
     
     sub log {
         my ($self, $msg) = @_;
@@ -58,7 +58,7 @@ following example:
     package WebApp;
     use Moose;
     
-    has 'logging_on' => (           #must exist before "with" statement
+    has 'logging_on' => (   # must exist before "with" statement
         is  => 'rw',
         isa => 'Int'
     );
@@ -75,15 +75,15 @@ following example:
     
 
 Now if the prefix or logging_on attribute are not defined in the implementing
-class this will cause Moose to throw an exception. The only caveat to
+class, this will cause Moose to throw an exception. The only caveat to
 requiring "attributes" in roles is that it must be defined prior to the "with"
 statement in the implementing class. However, methods can be defined later in
 the Moose class.
 
 ### MODIFYING INSTANCES
 
-Finally the best part is that at run-time we can apply rules to already
-initialized objects. This is done by importing the Moose::Util function
+Finally, the best part is at run-time we can apply roles to an already
+initialized object. This is done by importing the Moose::Util function
 "apply_all_roles".
 
     use Moose::Util qw( apply_all_roles );
@@ -91,12 +91,13 @@ initialized objects. This is done by importing the Moose::Util function
     my $app = WebApp->new;
     apply_all_roles( $app, 'SophisticatedLogger' );
 
-This is a powerful feature to apply roles to initialized objects. This will
+As demonstrated above, this is an extremely powerful feature. This will
 enable various instances of the same class to have different role flavors.
-Common use cases could include dynamic configurations that change at run-time
-or for possible debugging efforts.
+Common use cases could include dynamic configurations that change objects at run-time
+or for possible debugging efforts on individual objects.
 
-As we can see, roles bring to the table good, clean, and very powerful
-programming patterns. It's very exciting to see where Moose is taking Perl and how
-developing for Perl is so much more fun!
+As we can see, roles bring to the table a cleaner way to implement aspect
+style programming to Perl. It's very exciting to see where Moose is taking
+Perl.
+
 
