@@ -1,7 +1,7 @@
 # Roles with Moose
 
 In my previous [posting](http://www.loganbell.org/pages/post/view/modern-perl-with-moose/) 
-I discussed [Moose](http://www.moose.org) and two advantages to using.  Moose is a large library and 
+I discussed [Moose](http://www.moose.org) and two advantages to using it.  Moose is a large library and 
 it offers so many features that it's difficult to do it justice in a single post. 
 Today, I think it would be good to take a tour of Moose roles, Primarily I
 would like to describe what they are and how to do some general
