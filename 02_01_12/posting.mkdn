@@ -1,64 +1,102 @@
 # Roles with Moose
 
-In my previous [posting](boo) I discussed Moose and two advantages to using.
-Moose is a large library and it offers so many features that it's difficult to
-it justice in a single post. Today, I think it would be good to take tour of
-Moose roles, what they are, and how they promote good object oriented design.
+In my previous [posting](http://www.loganbell.org/pages/post/view/modern-perl-with-moose/) 
+I discussed [Moose](http://www.moose.org) and two advantages to using.  Moose is a large library and 
+it offers so many features that it's difficult to do it justice in a single post. 
+Today, I think it would be good to take a tour of Moose roles, Primarily I
+would like to describe what they are and how to do some general
+implementations.
 
-## A Role?
+## A role you say?
 
 A role in terms of Moose is very similar to a
 ["mix-in"](http://en.wikipedia.org/wiki/Mixin) that is common in other
-languages such as Ruby. The idea behind a role is that it contains methods and
+languages such as [Ruby.](http://www.ruby.org) The idea behind a role is that it contains methods and
 attributes that can be applied to a class, but the role itself cannot be
-iniatilized. For example, logging is a common role, or anything abstract that
-adds characteristtis to a class. 
+initialized like a class. For example, logging is a common usage of role, or anything 
+abstract that adds characteristics to a class. Someone once said that classes
+are nouns, methods are verbs, and roles are adjectives.
 
-## Let's see it in action
+Let's see a a role in action:
 
     package SophisticatedLogger;
     use Moose::Role;
 
     sub log {
-        my ($shelf, $msg) = @_
+        my ($self, $msg) = @_;
         print "$msg\n";
     }
 
-Further in our class:
+Later in our class, we implement or consume the role:
 
     package WebApp;
     use Moose;
-    with 'SophisticatedLogger';
+    with 'SophisticatedLogger';     # This consumes the role.
 
     sub do_it {
         my $self = shift;
         $self->log("We're doing it!");
     }
 
-Pretty cool? It gets even better. Let's say that one comes from the java world
-of implemented interfaces - well roles can enforce an interface when they are
-consumed by a class. We could have an attribute be implemented such as the
-following:
+Notice how $self now has access to the "log" method? It gets even better. Let's 
+say that one one is privy to the concept of java style interfaces, roles can
+used to enforce an interface when they are consumed by a class. This means that a role can
+dictate that a method or attribute be implemented such as in the
+following example:
 
     package SophisticatedLogger;
     use Moose::Role;
-
+    
+    requires 'prefix';      #required attribute
+    requires 'logging_on';  #requird method
+    
     sub log {
-        my ($shelf, $msg) = @_
-        print "$msg\n";
+        my ($self, $msg) = @_;
+        print $self->prefix .  " - " . $msg . "\n";
     }
 
     package WebApp;
     use Moose;
-
+    
+    has 'logging_on' => (           #must exist before "with" statement
+        is  => 'rw',
+        isa => 'Int'
+    );
+    
+    with 'SophisticatedLogger';
+    
+    sub prefix { return 'Webapp' }
+    
+    sub do_it {
+        my $self = shift;
+        $self->logging_on(1);
+        $self->log("We're doing it!");
+    }
     
 
-    with 'SophisticatedLogger';
-
-    sub do_it {
-
-        my $self = shift;
-        $self->log("We're doing it!");
-    }
+Now if the prefix or logging_on attribute are not defined in the implementing
+class this will cause Moose to throw an exception. The only caveat to
+requiring "attributes" in roles is that it must be defined prior to the "with"
+statement in the implementing class. However, methods can be defined later in
+the Moose class.
 
 ### MODIFYING INSTANCES
+
+Finally the best part is that at run-time we can apply rules to already
+initialized objects. This is done by importing the Moose::Util function
+"apply_all_roles".
+
+    use Moose::Util qw( apply_all_roles );
+     
+    my $app = WebApp->new;
+    apply_all_roles( $app, 'SophisticatedLogger' );
+
+This is a powerful feature to apply roles to initialized objects. This will
+enable various instances of the same class to have different role flavors.
+Common use cases could include dynamic configurations that change at run-time
+or for possible debugging efforts.
+
+As we can see, roles bring to the table good, clean, and very powerful
+programming patterns. It's very exciting to see where Moose is taking Perl and how
+developing for Perl is so much more fun!
+
