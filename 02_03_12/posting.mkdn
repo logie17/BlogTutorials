@@ -9,7 +9,7 @@ from a database, such as [SQLite](http://www.sqlite.org). Oh, and it'll also
 does an insert.
 
 Below is an example of a couple standard insert and update statements using the
-ubiquitious (DBI)[https://metacpan.org/module/DBI] module:
+ubiquitious [DBI](https://metacpan.org/module/DBI) module:
 
     my $sth = $dbh->prepare("select columny from tablex where id = ?");
     $sth->execute(1);
