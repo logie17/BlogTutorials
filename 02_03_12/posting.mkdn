@@ -22,20 +22,21 @@ If the problem isn't abvious is that instead of just managing Perl it's that
 we have to now manage two languages. The
 language of Perl, the host language, and the new embedded
 [DSL](http://en.wikipedia.org/wiki/Domain-specific_language) known as SQL. 
-As the story goes with any code base, what begins as a small application soon grows to thousands of lines of
+As the story unfolds with any code base, what begins as a small application soon grows to thousands of lines of
 code with many modules that interact with various aspects of the database. The
 once beautiful code base of Perl is now about 40% embedded SQL. It becomes
 fragile to maintain and difficult to do any upgrades on the database itself
-because of all the hard-coded SQL statements.
+because of all the hard-coded SQL statements specific to [ INSERT FAVORITE
+DATABASE HERE ].
 
 ## The solution
 
 Now that we have a clear understanding of the problem, how do we go about
-solving t? First, let's imagine a world where SQL doesn't need 
+solving it? First, let's imagine a world where SQL doesn't need 
 to be created throughout one's site but instead abstracted using 
-native [Perl](http://www.perl.org) data structures. Imagine being able to create SQL statements 
-without having to write a single bit of SQL. Well, this world can be a reality with
-[Abstract::SQL.](https://metacpan.org/module/SQL::Abstract)
+native [Perl](http://www.perl.org) data structures. Dream of a day of being able to create SQL statements 
+without having to write a single bit of SQL. Well, this world does exist and
+it can be reached with [Abstract::SQL.](https://metacpan.org/module/SQL::Abstract)
 
 Here are two simple examples of the same SQL above demonstrated in an abstract
 way using Abstract::SQL. 
@@ -63,6 +64,6 @@ works seamlessly with any exsting DBI calls.
 documented library that will go a long way in making nice clean and maintable 
 code. However, there are a few shortcomings to SQL::Abstract in that it's 
 lightweight and doesn't support many other more advanced SQL statements 
-such as grouping or having. However, for the majority of the all SQL 
+such as grouping or having. But for the majority of the all SQL 
 queries it will work just fine. So have fun and stop polluting the code 
 base with embedded SQL!
