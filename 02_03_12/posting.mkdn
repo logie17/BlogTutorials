@@ -1,6 +1,6 @@
 # Abstract thou SQL
 
-Let's take a break from [Moose](http://www.moose.org) and change gears a 
+Let's take a break from [Moose](http://www.moose.org) and change gears and 
 visit a topic that I believe every web developer will have to grapple 
 with at some point or another - integrating
 [SQL](http://en.wikipedia.org/wiki/SQL) with a web application. 
@@ -18,12 +18,12 @@ ubiquitious [DBI](https://metacpan.org/module/DBI) module:
                 into tablex (a,b)
                 values (?,?)", undef ,(1,2) ); 
 
-If the problem isn't abvious is that instead of just managing Perl it's that
-we have to now manage two languages. The
+If the problem isn't obvious it is that instead of just managing Perl it's that
+we have to now manage two languages - the
 language of Perl, the host language, and the new embedded
 [DSL](http://en.wikipedia.org/wiki/Domain-specific_language) known as SQL. 
 As the story unfolds with any code base, what begins as a small application soon grows to thousands of lines of
-code with many modules that interact with various aspects of the database. The
+code with many modules that interact with various aspects of the database, the
 once beautiful code base of Perl is now about 40% embedded SQL. It becomes
 fragile to maintain and difficult to do any upgrades on the database itself
 because of all the hard-coded SQL statements specific to [ INSERT FAVORITE
