@@ -1,0 +1,41 @@
+# YAPC Afterthoughts
+
+Attending [YAPC](http://blog.yapcna.org/) this year was an experience I shall
+always remember.  In actuality, this was the first year that I have ever attended
+YAPC, and hopefully not my last. This year the conference was held in
+beautiful [Madison](http://en.wikipedia.org/wiki/Madison,_Wisconsin),
+Wisconsin. Further, it was the largest YAPC by attendance numbers in North
+America ever. 
+
+## Impressions
+
+All of the talks that I attended were extremely high quality. The
+unofficial moniker was "diversity", or how as a community can we allow other
+perspectives and viewpoints in. This was driven home by the keynote address by
+[Michael Schwern.](https://metacpan.org/author/MSCHWERN) In many regards this
+is nothing new in the software development world, but seems to be a far worse
+problem in open source communities. The group as a whole, open source
+communities (including Perl as well), is very homogeneous and was
+reported to only have 5% developers of the female persuasion. 
+
+Further, there were many great talks, everything from
+[Web::Machine](https://metacpan.org/module/Web::Machine) to
+[Bread::Board.](https://metacpan.org/module/Bread::Board) I
+soaked up as much as I could. The only frustrating aspect to the conference is
+that there were too many interesting talks scheduled at the exact same time, and made it
+difficult for me to decide which to participate in.
+
+## Takeaways
+
+All in all, it was encouraging to see Perl having such a resurgence. I met many interesting
+and fascinating people, many of whom have authored books I own. After
+consuming so much great Perl knowledge I feel a bit of responsibility after
+the conference to give back to the community in anyway. So my personal goals
+until the next YAPC include the following:
+
+   * Blog at least once a week regarding Perl.
+   * Contribute to [CPAN](http://search.cpan.org) at least once a month.
+   * And stop being an outsider to the community. That means talking on IRC or
+   mailing lists and letting my ideas be known.
+
+With that said, I hope to see everyone again next year at YAPC 2013!
