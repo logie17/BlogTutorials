@@ -1,0 +1,59 @@
+# Plack It Up 
+
+The new hot these days is [Plack](http://plackperl.org/). Plack is a toolkit
+of perl modules that allows a web developer to essentially abstract the code
+from the web server. What this means is that a developer is now free to work
+within a unified coding environment and not worry about the finer detail of
+making sure the code base works for FastCGI, ModPerl, or even CGI. The code
+will just work in whatever environemnt it is pushed to.
+
+## Middleware
+
+One of the cool features that come with plack is the idea of Middleware.
+
+
+## 
+
+    package Plack::Middleware::GoogleAnalytics; 
+    use strict;
+    use warnings;
+    use Plack::Util;
+    parent 'Plack::Middleware';
+
+    sub call {
+        my ($self, $env) = @_;
+    
+        my $response = $self->app->($env);
+        $self->response_cb($response, sub { 
+            my ($self, $response)   = @_;
+        });
+    }
+    
+    sub _handle_response {
+        my ($self, $response)   = @_;
+        my $header              = Plack::Util::headers($response->[1]);
+        my $content_type        = $header->get('Content-Type');
+        my $ga_id               = $self->ga_id;
+        
+        return unless defined $content_type && $content_type =~ qr[text/html] && $ga_id;
+        
+        my $body = [];
+        Plack::Util::foreach( $response->[2], sub { push @$body, $_[0] });
+        $body = join '', @$body;
+    
+        $body .= render_mt($self->ga_template, $ga_id)->as_string;
+        
+        $response->[2] = [$body];
+        $header->set('Content-Length', length $body);
+    
+        return;
+    }
+
+
+
+
+
+
+
+
+
